@@ -114,7 +114,7 @@ Route::middleware('auth')->group(function () {
 
     Route::prefix('admin')->group(function () {
         Route::get('/dashboard', [DashboardAdminController::class, 'index'])->name('admin.dashboard');
-
+        
         Route::prefix('verifikasi-penyalur')->group(function () {
             Route::get('/', [VerifikasiAdminController::class, 'index'])->name('admin.verifikasi-penyalur.index');
             Route::get('/{id}', [VerifikasiAdminController::class, 'show'])->name('admin.verifikasi-penyalur.show');

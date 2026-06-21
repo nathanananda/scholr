@@ -162,25 +162,7 @@
                 </span>
             </a>
 
-            <p
-                class="sidebar-section-label text-teal-800 text-[10px] font-semibold uppercase tracking-widest px-5 pt-5 mb-2">
-                Account
-            </p>
 
-
-            <a href="{{ route('penerima.profile') }}"
-                class="group nav-item flex items-center gap-3 rounded-xl px-5 py-3 cursor-pointer
-    transition-all duration-200 ease-out
-    hover:bg-teal-600 hover:shadow-md hover:shadow-teal-100
-    hover:-translate-y-[1px]
-    {{ request()->routeIs('penerima.profile') ? 'bg-teal-600 shadow-md shadow-teal-100 -translate-y-[1px]' : '' }}">
-                <i
-                    class="fa-solid fa-id-badge text-teal-700 group-hover:text-white {{ request()->routeIs('penerima.profile') ? 'text-white' : 'text-teal-700 group-hover:text-white' }}"></i>
-                <span
-                    class="nav-label text-sm font-medium
-        transition-colors duration-200
-        {{ request()->routeIs('penerima.profile') ? 'text-white' : 'text-teal-800 group-hover:text-white' }}">Profile</span>
-            </a>
 
 
 

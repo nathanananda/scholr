@@ -25,28 +25,32 @@
         </div>
 
         <div class="flex items-center gap-2 flex-wrap">
-            {{-- Tombol Run SAW --}}
+            {{-- Tombol Run SPK --}}
             @php
-                $canRunSaw =
-                    $applications->where('status', 'under_review')->count() > 0 &&
-                    $applications->where('status', 'submitted')->count() === 0;
-                $sawDone = $applications->whereNotNull('saw_rank')->count() > 0;
+                $underReviewCount = $applications->where('status', 'under_review')->count();
+                $submittedCount = $applications->where('status', 'submitted')->count();
+
+                $canRunSpk = $underReviewCount >= 2 && $submittedCount === 0;
+
+                $spkDone =
+                    $applications->whereNotNull('saw_rank')->count() > 0 &&
+                    $applications->whereNotNull('smart_rank')->count() > 0;
             @endphp
 
-            @if ($sawDone)
+            @if ($spkDone)
                 <a href="{{ route('penyalur.pelamar.ranking', $scholarship->id) }}"
                     class="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium px-4 py-2.5 rounded-xl transition-colors">
-                    <i class="fa-solid fa-trophy"></i> Lihat Ranking SAW
+                    <i class="fa-solid fa-trophy"></i> Lihat Ranking SPK
                 </a>
             @endif
 
-            @if ($canRunSaw)
-                <form action="{{ route('penyalur.pelamar.run-saw', $scholarship->id) }}" method="POST"
-                    onsubmit="return confirm('Jalankan perhitungan SAW untuk semua pelamar? Pastikan semua dokumen sudah diverifikasi.')">
+            @if ($canRunSpk)
+                <form action="{{ route('penyalur.pelamar.runSpk', $scholarship->id) }}" method="POST"
+                    onsubmit="return confirm('Jalankan perhitungan SAW & SMART untuk semua pelamar? Pastikan semua dokumen sudah diverifikasi.')">
                     @csrf
                     <button type="submit"
                         class="inline-flex items-center gap-2 bg-teal-600 hover:bg-teal-700 text-white text-sm font-medium px-4 py-2.5 rounded-xl transition-colors">
-                        <i class="fa-solid fa-calculator"></i> Jalankan SAW
+                        <i class="fa-solid fa-calculator"></i> Jalankan SPK
                     </button>
                 </form>
             @endif

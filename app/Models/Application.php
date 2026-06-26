@@ -29,6 +29,11 @@ class Application extends Model
         return $this->hasMany(SawResult::class, 'application_id');
     }
 
+    public function smartResults()
+    {
+        return $this->hasMany(SmartResult::class, 'application_id');
+    }
+
     public function documents()
     {
         return $this->hasMany(ApplicationDocument::class);

@@ -36,7 +36,6 @@ class BeasiswaPenyalurController extends Controller
             'start_date'        => ['required', 'date'],
             'end_date'          => ['required', 'date', 'after_or_equal:start_date'],
             'announcement_date' => ['nullable', 'date', 'after_or_equal:end_date'],
-            'status'            => ['required', Rule::in(['Draft', 'Aktif', 'Seleksi', 'Selesai'])],
         ], [
             'name.required'                   => 'Nama beasiswa wajib diisi.',
             'name.max'                        => 'Nama beasiswa maksimal 150 karakter.',
@@ -57,16 +56,14 @@ class BeasiswaPenyalurController extends Controller
             'end_date.after_or_equal'         => 'Tanggal selesai tidak boleh sebelum tanggal mulai.',
             'announcement_date.date'          => 'Format tanggal pengumuman tidak valid.',
             'announcement_date.after_or_equal' => 'Tanggal pengumuman tidak boleh sebelum tanggal selesai.',
-            'status.required'                 => 'Status wajib dipilih.',
-            'status.in'                       => 'Status tidak valid.',
         ]);
 
         $validated['penyalur_id'] = Auth::id();
-
+        $validated['status'] = 'Draft';
         Scholarships::create($validated);
 
-        return redirect()->route('penyalur.beasiswa')
-            ->with('success', 'Beasiswa berhasil ditambahkan.');
+        return redirect()->route('penyalur.beasiswa.criteria', Scholarships::latest()->first()->id)
+            ->with('success', 'Beasiswa berhasil ditambahkan & Silahkan Setup Kriteria.');
     }
     /**
      * Display the specified scholarship.

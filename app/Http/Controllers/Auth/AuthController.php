@@ -90,7 +90,7 @@ class AuthController extends Controller
 
         // Redirect ke halaman biodata sesuai role
         if ($request->role === 'penerima') {
-            return redirect()->route('penerima.biodata')->with('info', 'Akun berhasil dibuat! Lengkapi biodata kamu terlebih dahulu.');
+            return redirect()->route('penerima.profile')->with('info', 'Akun berhasil dibuat! Lengkapi biodata kamu terlebih dahulu.');
         }
 
         return redirect()->route('penyalur.profile')->with('info', 'Akun berhasil dibuat! Lengkapi profil organisasi kamu.');

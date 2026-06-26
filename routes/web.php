@@ -56,6 +56,8 @@ Route::middleware('auth')->group(function () {
                 // Daftar pelamar per beasiswa
                 Route::get('/{scholarshipId}', [PelamarBeasiswaPenyalurController::class, 'show'])->name('penyalur.pelamar.show');
                 // ✅ Ranking & run-saw HARUS di atas /{scholarshipId}/{applicationId}
+
+                Route::post('{scholarshipId}/run-spk', [PelamarBeasiswaPenyalurController::class, 'runSpk'])->name('penyalur.pelamar.runSpk');
                 Route::get('/{scholarshipId}/ranking', [PelamarBeasiswaPenyalurController::class, 'ranking'])->name('penyalur.pelamar.ranking');
                 Route::post('/{scholarshipId}/run-saw', [PelamarBeasiswaPenyalurController::class, 'runSaw'])->name('penyalur.pelamar.run-saw');
                 Route::post('/{scholarshipId}/tetapkan', [PelamarBeasiswaPenyalurController::class, 'tetapkanPenerima'])->name('penyalur.pelamar.tetapkan');
@@ -114,7 +116,7 @@ Route::middleware('auth')->group(function () {
 
     Route::prefix('admin')->group(function () {
         Route::get('/dashboard', [DashboardAdminController::class, 'index'])->name('admin.dashboard');
-        
+
         Route::prefix('verifikasi-penyalur')->group(function () {
             Route::get('/', [VerifikasiAdminController::class, 'index'])->name('admin.verifikasi-penyalur.index');
             Route::get('/{id}', [VerifikasiAdminController::class, 'show'])->name('admin.verifikasi-penyalur.show');
